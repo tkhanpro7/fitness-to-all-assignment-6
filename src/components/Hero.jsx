@@ -5,8 +5,8 @@ export default function Hero() {
         <section className="bg-[#1a1a1a] mx-4 md:mx-12 mt-6 rounded-3xl overflow-hidden flex flex-col md:flex-row items-center p-8 md:p-16 border border-gray-800">
             <div className="flex-1 text-center md:text-left z-10">
                 <p className="text-[#ccff00] font-bold tracking-widest text-sm mb-4">WORKOUT LIBRARY</p>
-                <h1 className="text-4xl md:text-6xl font-bold text-white uppercase mb-6 leading-tight">
-                    Train with intent.<br />Log every set.
+                <h1 className="text-4xl md:text-5xl font-bold text-white uppercase mb-6 leading-tight">
+                    Train with intent. Log<br /> every set.
                 </h1>
                 <p className="text-gray-400 mb-8 max-w-md mx-auto md:mx-0">
                     FitLog is a dark, no-nonsense gym companion: pick a lift, lock it into today's plan, and watch the week's work add up.
@@ -21,7 +21,7 @@ export default function Hero() {
 
             {/* Hero Image (Right Side) */}
             <div className="flex-1 mt-8 md:mt-0 flex justify-center">
-                {/* এখানে আপনার আসল হিরো ইমেজের সোর্স দিন */}
+                
                 <Image
                     src="/Images/banner.png"
                     alt="Hero Workout"

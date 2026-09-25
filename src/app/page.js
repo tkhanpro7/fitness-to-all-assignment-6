@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Hero2 from "@/components/Hero2";
+import Hero from "@/components/Hero";
 import Library from "@/components/Library"; // Library ইম্পোর্ট করা হলো
 
 export default function Home() {
@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Component */}
-      <Hero2 />
+      <Hero />
 
       {/* Library Component (Props হিসেবে ডেটা পাঠানো হলো) */}
       <Library workouts={workouts} loading={loading} />
