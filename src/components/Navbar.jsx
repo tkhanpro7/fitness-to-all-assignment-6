@@ -3,17 +3,27 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useWorkout } from "../context/WorkoutContext";
+import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
   const { plan, saved } = useWorkout();
 
   return (
-    <nav className="flex items-center justify-between px-6 py-4 md:px-12 bg-[#121212] border-b border-gray-800">
-      {/* Left: Logo */}
-      <Link href="/" className="flex items-center gap-2 text-xl font-bold tracking-widest text-white">
-        {/* আপনি চাইলে এখানে আপনার লোগো আইকন SVG বসাতে পারেন */}
-        <span className="text-[#ccff00]">FIT</span>LOG
+    <nav className="flex items-center justify-between px-6 py-4 md:px-12 bg-[#121212] border-b border-gray-800 sticky top-0 z-50">
+      
+      {/* Left: Logo & Brand */}
+      <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+        <Image 
+          src="/images/logo.png" 
+          alt="FitLog Logo" 
+          width={30} 
+          height={30} 
+          className="object-contain"
+        />
+        <span className="text-xl font-bold tracking-widest text-white">
+          <span className="text-[#ccff00]">FIT</span>LOG
+        </span>
       </Link>
 
       {/* Middle: Navigation Links */}
@@ -47,6 +57,7 @@ export default function Navbar() {
           </span>
         </Link>
       </div>
+      
     </nav>
   );
 }

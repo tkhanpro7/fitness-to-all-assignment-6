@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Hero from "@/components/Hero";
-import Library from "@/components/Library"; // Library ইম্পোর্ট করা হলো
+import Library from "@/components/Library"; 
 
 export default function Home() {
   const [workouts, setWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // API থেকে ডেটা ফেচ করা
+  // API data fetch
   useEffect(() => {
     const fetchWorkouts = async () => {
       try {
@@ -30,7 +30,7 @@ export default function Home() {
       {/* Hero Component */}
       <Hero />
 
-      {/* Library Component (Props হিসেবে ডেটা পাঠানো হলো) */}
+      {/* Library Component sent as Props */}
       <Library workouts={workouts} loading={loading} />
     </div>
   );

@@ -15,10 +15,10 @@ export default function RootLayout({ children }) {
         <WorkoutProvider>
           <Navbar />
           
-          <main className="flex-grow">
+          <main className="grow">
              {children}
           </main>
-          
+           
           <Footer />
         </WorkoutProvider>
       </body>

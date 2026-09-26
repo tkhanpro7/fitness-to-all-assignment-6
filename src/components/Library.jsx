@@ -1,5 +1,5 @@
 import WorkoutCard from "./WorkoutCard";
-import LoadingSpinner from "./LoadingSpinner"; // Import করা হলো
+import LoadingSpinner from "./LoadingSpinner"; 
 
 export default function Library({ workouts, loading }) {
   return (
@@ -9,7 +9,7 @@ export default function Library({ workouts, loading }) {
         <p className="text-gray-400">Twelve lifts covering every major muscle group.</p>
       </div>
 
-      {/* LoadingSpinner কম্পোনেন্ট ব্যবহার করা হলো */}
+      {/* LoadingSpinner component use*/}
       {loading ? (
         <LoadingSpinner />
       ) : (

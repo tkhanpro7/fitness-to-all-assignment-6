@@ -1,14 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, notFound } from "next/navigation"; // notFound ইম্পোর্ট করা হলো
+import { useParams, notFound } from "next/navigation";
 import { useWorkout } from "@/context/WorkoutContext";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Toast from "@/components/Toast";
+import Image from "next/image";
 
 export default function WorkoutDetails() {
   const params = useParams();
-  const { addToPlan, saveForLater } = useWorkout();
+  
+  // Context plan and saved checking
+  const { plan, saved, addToPlan, saveForLater } = useWorkout();
   
   const [workout, setWorkout] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,7 +22,6 @@ export default function WorkoutDetails() {
       try {
         const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${params.id}`);
         
-        // API যদি 404 বা অন্য কোনো এরর স্ট্যাটাস দেয়
         if (!res.ok) {
           setWorkout(null);
           return;
@@ -27,7 +29,6 @@ export default function WorkoutDetails() {
 
         const data = await res.json();
         
-        // ডাটা যদি ফাঁকা হয় বা আসল অবজেক্ট না হয় (যেমন id বা name না থাকে)
         if (!data || Object.keys(data).length === 0 || !data.name) {
           setWorkout(null);
         } else {
@@ -52,33 +53,54 @@ export default function WorkoutDetails() {
   };
 
   const handleAddToPlan = () => {
+    // check if the workout is already in the plan
+    const isAlreadyAdded = plan.some((item) => item.id === workout.id);
+    if (isAlreadyAdded) {
+      showToast("⚠️ You already added this workout!");
+      return; // further not executed
+    }
+
+    // ২. 5 workouts limit check
+    if (plan.length >= 5) {
+      showToast("🚫 Limit reached! You can only add 5 workouts.");
+      return;
+    }
+
+    // new workout add
     addToPlan(workout);
     showToast("Added to today's plan! 📋");
   };
 
   const handleSaveForLater = () => {
+    // checking if the workout is already saved for later
+    const isAlreadySaved = saved.some((item) => item.id === workout.id);
+    if (isAlreadySaved) {
+      showToast("⚠️ Already saved for later!");
+      return;
+    }
+
+    //New workout save
     saveForLater(workout);
     showToast("Saved for later! 🔖");
   };
 
-  // 1. ডেটা লোড হওয়ার সময় স্পিনার দেখাবে
   if (loading) return <LoadingSpinner />;
   
-  // 2. লোডিং শেষ কিন্তু ডেটা পাওয়া যায়নি, তখন সরাসরি 404 পেজে রিডাইরেক্ট করবে
   if (!loading && !workout) {
     notFound(); 
   }
 
-  // 3. সঠিক ডেটা পেলে টেমপ্লেট রেন্ডার করবে
   return (
     <div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
         
         <div className="bg-[#1e1e1e] rounded-3xl overflow-hidden border border-gray-800 sticky top-24">
-          <img 
-            src={workout.image || "https://via.placeholder.com/600x800"} 
+          <Image 
+            src={workout.image} 
             alt={workout.name}
-            className="w-full h-auto object-cover aspect-[4/5]"
+            width={600}
+            height={800}
+            className="w-full h-auto object-cover aspect-4/5"
           />
         </div>
 
