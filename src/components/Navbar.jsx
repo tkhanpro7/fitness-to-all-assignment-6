@@ -15,7 +15,7 @@ export default function Navbar() {
       {/* Left: Logo & Brand */}
       <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
         <Image 
-          src="/images/logo.png" 
+          src="/Images/logo.png" 
           alt="FitLog Logo" 
           width={30} 
           height={30} 
